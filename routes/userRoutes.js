@@ -17,6 +17,8 @@ router.post('/login', async (req, res) => {
   });
   // Validate password
   var valid = await User.validatePassword(userName, password);
+  // Bypass password validation - REMOVE IN PROD
+  //valid = true;
   if (valid) {
     const token = jwt.sign({
       user: user._id
@@ -33,10 +35,6 @@ router.post('/login', async (req, res) => {
 router.use('/logout', async (req, res) => {
   res.clearCookie('session-token');
   res.redirect('/');
-});
-
-router.post('/signup', (req, res) => {
-  
 });
 
 module.exports = router;

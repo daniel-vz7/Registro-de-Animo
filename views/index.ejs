@@ -1,53 +1,14 @@
-<!DOCTYPE html>
-<html>
+<%- include('partials/header') %>
 
-  <head>
-    <title>Seguimiento de estres</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/css/main.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
-      integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
-      crossorigin="anonymous"></script>
-    <script src="/js/main.js"></script>
-  </head>
+<div class="container-fluid">
+  <script>
+    var _todayLogs = <%- JSON.stringify(logs) %>;
+  </script>
+  <div class="card my-4 p-2">
+    <canvas id="myChart" width="400" height="400"></canvas>
+  </div>
+  <%- include('partials/form-add_log'); %>
+</div>
+<script src="/js/main.js"></script>
 
-  <body>
-    <%- include('partials/menu'); %>
-    <div class="container">
-      <%- include('partials/log_add'); %>
-      <%- include('partials/chart_daily'); %>
-    </div>
-
-    <script>
-      // Init Materialize
-      (function() {
-        $(function() {
-          var logs = <%- JSON.stringify(logs) %>;
-          const $canvas = $('#myChart');
-          global.fillCanvas($canvas, logs);
-          // Events
-          $('#enviar').on('click', function (e) {
-            const nivel = parseInt($('#nivel').val());
-            $.ajax({
-              url: '/log/add',
-              type: 'POST',
-              data: {
-                level: nivel,
-                time: moment().toJSON()
-              }
-            });
-          });
-
-          $('#nivel').on('change', function (e) {
-            $('.nivel').text($(e.currentTarget).val());
-          });
-        });
-      })();
-    </script>
-  </body>
-</html>
+<%- include('partials/footer') %>

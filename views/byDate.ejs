@@ -1,56 +1,43 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Seguimiento de estres</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/css/main.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
-      integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
-      crossorigin="anonymous"></script>
-    <script src="/js/main.js"></script>
-  </head>
+<%- include('partials/header') %>
 
-  <body>
-    <%- include('partials/menu'); %>
-    <div class="container">
-      <div class="card-panel teal lighten-5 date_picker">
-        <form action="">
-          <input type="text" class="datepicker no-autoinit getbydate-input">
-          <span class="btn waves-effect waves-light getbydate-button">Consultar<i class="material-icons right">search</i></span>
-          
-        </form>
-      </div>
-      <%- include('partials/chart_daily'); %>
+<div class="container-fluid">
+  <div class="card my-4">
+    <h5 class="card-header">Dia a consultar</h5>
+    <div class="card-body">
+      <form id="consultar">
+        <input name="date" class="date_picker"/>
+        <div class="d-flex justify-content-center mt-3" >
+          <button class="btn btn-primary" name="ignore" type="submit">Consultar</button>
+        </div>
+      </form>
     </div>
+  </div>
+  <div class="card my-4 p-2">
+    <canvas id="myChart" width="400" height="400"></canvas>
+  </div>
+</div>
 
-    <script>
-      M.Datepicker.init($('.getbydate-input'), {
-        format: 'yyyy-mm-dd',
-        defaultDate: moment().toDate(),
-        setDefaultDate: true,
-        autoClose: true,
-        maxDate: moment().toDate()
-      });
-      
-      // Events
-      $('.getbydate-button').on('click', function (e) {
-        const $form = $(e.currentTarget).closest('form');
-        const mDate = M.Datepicker.getInstance($form.find('.getbydate-input'));
-        const date = moment(mDate.date).format('YYYY-MM-DD');
-        $.ajax({
-          url:  `/log/date/${date}`,
-          type: 'GET',
-        }).done(function(result) {
-          const $canvas = $('#myChart');
-          global.fillCanvas($canvas, result);
-        });
-      });
-    </script>
-  </body>
+<div class="modal fade" id="no_registros" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">No hay registros</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="lead">
+          No se encontraron registros para esta fecha. Prueba con otra fecha
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
-</html>
+<script src="/js/main.js"></script>
+
+<%- include('partials/footer') %>

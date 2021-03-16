@@ -1,39 +1,22 @@
-<header>
-  <nav class="white">
-    <div class="nav-wrapper">
-      <a href="#" data-target="slide-out" class="sidenav-trigger menu left black-text">
-      <i class="material-icons">menu</i></a>
-      <a href="/" class="brand-logo center black-text">Animo</a>
-    </div>
-  </nav>
-
-  <ul id="slide-out" class="sidenav">
-    <%# <li>
-      <div class="user-view">
-        <div class="background">
-          <img src="images/office.jpg">
-        </div>
-        <a href="#user"><img class="circle" src="images/yuna.jpg"></a>
-        <a href="#name"><span class="white-text name">John Doe</span></a>
-        <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
-      </div>
-    </li>
-     %>
-    <li>
-      <div class="divider"></div>
-    </li>
-    <li><a href="/log/date"><i class="material-icons">date_range</i>Buscar por dia</a></li>
-    <li>
-      <div class="divider"></div>
-    </li>
-    <li><a href="/user/logout"><i class="material-icons">exit_to_app</i>Cerrar sesión</a></li>
-    <%# 
-    <li><a href="#!">Second Link</a></li>
-    <li>
-      <div class="divider"></div>
-    </li>
-    <li><a class="subheader">Subheader</a></li>
-    <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
-     %> 
-  </ul>
-</header>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="/">
+    <img src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+    Daniel Vargas
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/"><i class="material-icons float-left mr-2">home</i>Inicio</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/log/date"><i class="material-icons float-left mr-2">date_range</i>Buscar por dia</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/user/logout"><i class="material-icons float-left mr-2">exit_to_app</i>Cerrar sesión</a>
+      </li>
+    </ul>
+  </div>
+</nav>

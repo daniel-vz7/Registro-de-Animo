@@ -1,4 +1,3 @@
-const cookieParser = require('cookie-parser');
 const express = require('express');
 const moment = require('moment');
 
@@ -7,6 +6,7 @@ const Log = require('../helpers/log');
 const router = express.Router();
 router.use(require('cookie-parser')());
 
+// Validate session
 router.use(function(req, res, next) {
   const token = req.cookies['session-token'];
   try {
@@ -15,6 +15,10 @@ router.use(function(req, res, next) {
       req.body.user_id = result.user;
       next();
     }
+    
+    // Bypass middleware - REMOVE IN PROD
+    //req.body.user_id = '5fdade13a0879233e8f4dc93';
+    //next();
   } catch(err) {
     res.redirect('/user/login');
   }
@@ -23,6 +27,7 @@ router.use(function(req, res, next) {
 // Display logs
 router.get('/', async (req, res) => {
   var logs = await Log.getByDay(req.body.user_id, moment());
+  // Clean properties
   logs = logs.map(function (params) {
     return {
       timestamp: params.timestamp,
@@ -39,10 +44,10 @@ router.get('/date', async (req, res) => {
   res.render('byDate');
 });
 
-router.get('/date/:date', async (req, res) => {
+router.post('/date', async (req, res) => {
   try {
-    var date = req.params.date;
-    var logs = await Log.getByDay(moment(date));
+    var date = req.body.date;
+    var logs = await Log.getByDay(req.body.user_id, moment(date));
     logs = logs.map(function (params) {
       return {
         timestamp: params.timestamp,
@@ -64,7 +69,7 @@ router.post('/add', async (req, res) => {
   try {
     var response = await Log.addLog({
       time: req.body.time,
-      level: req.body.level,
+      level: req.body['animo-value'],
       user_id: req.body.user_id
     });
     res.status(200).json(response);

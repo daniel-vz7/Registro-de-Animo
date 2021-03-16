@@ -44,13 +44,69 @@ const global = {
             }
           }]
         }
-      }
     });
   }
 };
 
-(function() {
-  $(function() {
-    M.AutoInit();
+$(function() {
+  // CUSTOM COMPLEMENTS
+  // Update range value on changes 
+  $('html, body').on('change', '.range-input input[type="range"]', function(e) {
+    const value = $(e.currentTarget).val();
+    $(e.currentTarget).closest('.range-input').find('.range-value').text(value);
   });
-})();
+
+  // Init date time picker
+  $('.date_time_picker').datetimepicker({
+    uiLibrary: 'bootstrap4'
+  });
+
+  // Init date picker
+  $('.date_picker').datepicker({
+    uiLibrary: 'bootstrap4',
+    format: 'yyyy-mm-dd'
+  });
+
+  // Initialize today chart
+  if (typeof _todayLogs != 'undefined') {
+    const $canvas = $('#myChart');
+    global.fillCanvas($canvas, _todayLogs);
+  }
+
+  // Events
+  $('form#animo').on('submit', function(e) {
+    e.preventDefault();
+    var formInputs = {};
+    $(e.currentTarget).serializeArray().map(function(x) {
+      formInputs[x.name] = x.value
+    });
+    $.ajax({
+      url: '/log/add',
+      type: 'POST',
+      data: {
+        time: moment().utc().toJSON(),
+        ...formInputs
+      }
+    });
+  });
+
+  $('form#consultar').on('submit', function (e) {
+    e.preventDefault();
+    var formInputs = {};
+    $(e.currentTarget).serializeArray().map(function(x) {
+      formInputs[x.name] = x.value
+    });
+    $.ajax({
+      url:  `/log/date`,
+      type: 'POST',
+      data: formInputs
+    }).done(function(result) {
+      if (result) {
+        const $canvas = $('#myChart');
+        global.fillCanvas($canvas, result);
+      } else {
+        $('#no_registros').modal('show');
+      }
+    });
+  });
+});
