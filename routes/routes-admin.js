@@ -1,9 +1,10 @@
 const express = require('express');
-const Admin = require('../helpers/helper-admin');
-const User = require('../helpers/user');
+const User = require('../helpers/helper-user');
+
 const router = express.Router();
-router.use(require('cookie-parser')());
+const Admin = require('../helpers/helper-admin');
 const jwt = require('jsonwebtoken');
+router.use(require('cookie-parser')());
 
 // Routes
 router.get('/login', async (req, res) => {

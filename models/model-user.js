@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const crypto = require('crypto');
-//const Schema = mongoose.Schema;
 
 const userSchema = mongoose.Schema({
   user_name: {
@@ -35,4 +34,4 @@ userSchema.methods.validPassword = function(password) {
 }; 
   
 // Exporting module to allow it to be imported in other files 
-const User = module.exports = mongoose.model('User', userSchema); 
+module.exports = mongoose.model('User', userSchema); 

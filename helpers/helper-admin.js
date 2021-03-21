@@ -1,4 +1,5 @@
 const Admin = require('../models/model-admin.js');
+
 module.exports = {
   getById: function getById(id) {
     try {

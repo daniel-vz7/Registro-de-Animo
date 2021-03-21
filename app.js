@@ -6,8 +6,8 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 // Routes
-app.use('/log', require('./routes/logRoutes'));
-app.use('/user', require('./routes/userRoutes'));
+app.use('/log', require('./routes/routes-log'));
+app.use('/user', require('./routes/routes-user'));
 app.use('/admin', require('./routes/routes-admin'));
 
 app.get('/', (req, res) => {

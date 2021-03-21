@@ -1,5 +1,4 @@
-const moment = require('moment');
-const Log = require('../models/log.js');
+const Log = require('../models/model-log.js');
 
 module.exports = {
   getByDay: function getByDay(userId, date) {

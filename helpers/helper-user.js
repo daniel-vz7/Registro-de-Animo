@@ -1,4 +1,4 @@
-const User = require('../models/user.js');
+const User = require('../models/model-user.js');
 
 module.exports = {
   getById: function getById(id) {
@@ -8,12 +8,6 @@ module.exports = {
       console.log(`Helpers - User - getById() => ${error}`);
     }
   },
-  // params must be an object
-  // {
-  //   id,
-  //   user_name,
-  //   ...
-  // }
   getUser: function getUser(params) {
     try {
       return User.findOne(params);  

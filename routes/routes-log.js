@@ -1,9 +1,9 @@
 const express = require('express');
 const moment = require('moment');
 
-const jwt = require('jsonwebtoken');
-const Log = require('../helpers/log');
 const router = express.Router();
+const Log = require('../helpers/helper-log');
+const jwt = require('jsonwebtoken');
 router.use(require('cookie-parser')());
 
 // Validate session
@@ -12,13 +12,12 @@ router.use(function(req, res, next) {
   try {
     var result = jwt.verify(token, '15102s');
     if (result && typeof result.user != 'undefined') {
+      console.log('ok');
       req.body.user_id = result.user;
       next();
+    } else {
+      res.status(503).send('NOT ok, youre admin')
     }
-    
-    // Bypass middleware - REMOVE IN PROD
-    //req.body.user_id = '5fdade13a0879233e8f4dc93';
-    //next();
   } catch(err) {
     res.redirect('/user/login');
   }

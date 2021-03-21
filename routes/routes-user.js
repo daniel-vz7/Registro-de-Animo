@@ -1,8 +1,9 @@
 const express = require('express');
-const User = require('../helpers/user');
+
 const router = express.Router();
-router.use(require('cookie-parser')());
+const User = require('../helpers/helper-user');
 const jwt = require('jsonwebtoken');
+router.use(require('cookie-parser')());
 
 // Routes
 router.get('/login', async (req, res) => {
