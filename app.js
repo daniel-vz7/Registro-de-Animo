@@ -8,9 +8,15 @@ app.use(express.static('public'));
 // Routes
 app.use('/log', require('./routes/logRoutes'));
 app.use('/user', require('./routes/userRoutes'));
+app.use('/admin', require('./routes/routes-admin'));
 
 app.get('/', (req, res) => {
   res.redirect('/log');
+});
+
+// 404 Page
+app.get('*', (req, res) => {
+  res.status(404).render('404');
 });
 
 // Init app

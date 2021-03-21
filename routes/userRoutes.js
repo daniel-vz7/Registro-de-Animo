@@ -6,17 +6,19 @@ const jwt = require('jsonwebtoken');
 
 // Routes
 router.get('/login', async (req, res) => {
-  res.render('login');
+  res.render('login', {
+    role: 'user'
+  });
 });
 
 router.post('/login', async (req, res) => {
-  var userName = req.body.user_name;
+  var username = req.body.user_name;
   var password = req.body.password;
   var user = await User.getUser({
-    user_name: userName
+    user_name: username
   });
   // Validate password
-  var valid = await User.validatePassword(userName, password);
+  var valid = await User.validatePassword(username, password);
   // Bypass password validation - REMOVE IN PROD
   //valid = true;
   if (valid) {

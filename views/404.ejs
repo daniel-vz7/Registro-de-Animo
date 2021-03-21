@@ -1,0 +1,25 @@
+<%- include('partials/header') %>
+
+<div class="container-fluid">
+  <div class="card my-4 p-2">
+    <div class="jumbotron my-0 bg-light">
+      <h1 class="display-4">404!</h1>
+      <p class="lead">Esta página no existe :(</p>
+      <hr class="my-4">
+      <p>No te preocupes, serás redirigido automaticamente a la página de Inicio en <span id="timer">10</span> segundos</p>
+      <a class="btn btn-primary btn-lg" href="/" role="button">Redirigir ahora</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function() {
+    var seconds = 10;
+    setInterval(function() {
+      $('#timer').text(--seconds);
+      if (!seconds) window.location.href = '/';
+    }, 1000);
+  });
+</script>
+
+<%- include('partials/footer') %>

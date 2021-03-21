@@ -1,7 +1,7 @@
-<div class="card my-4">
+<div class="card my-4 rounded-lg">
   <h5 class="card-header">Iniciar sesion</h5>
   <div class="card-body">
-    <form class="d-flex flex-column" action="/user/login" method="post">
+    <form class="d-flex flex-column" action="/<%= role %>/login" method="post">
       <div class="form-group">
         <label for="exampleInputEmail1">Usuario</label>
         <input type="text" class="form-control" id="exampleInputEmail1" name="user_name" placeholder="Usuario">
@@ -14,5 +14,12 @@
         <button class="btn btn-primary" name="ignore" type="submit">Iniciar sesion</button>
       </div>
     </form>
+  </div>
+  <div class="card-footer d-flex justify-content-center">
+    <% if (role == 'admin') { %>
+      <a class="text-center" href="/user/login">Iniciar sesión como usuario</a>
+    <% } else { %>
+      <a class="text-center" href="/admin/login">Iniciar sesión como administrador</a>
+    <% } %> 
   </div>
 </div>

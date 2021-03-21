@@ -1,0 +1,20 @@
+<%- include('partials/header') %>
+
+<div class="container-fluid my-4">
+  <% for(let index = 0; index < patients.length; index++) { %>
+    <div class="card d-flex justify-content-center mb-4">
+      <img src="/asset/img/default.png" class="card-img-top rounded-lg">
+      <div class="card-body">
+        <h5 class="card-title"><%= patients[index].name %> <%= patients[index].last_name %> </h5>
+        <a href="#" class="btn btn-primary">Ver registros</a>
+      </div>
+      <div class="card-footer">
+        Creado el dia tal tal tal
+      </div>
+    </div>
+  <% } %>
+</div>
+
+<script src="/js/main.js"></script>
+
+<%- include('partials/footer') %>

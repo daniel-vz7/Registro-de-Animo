@@ -21,13 +21,29 @@ module.exports = {
       console.log(`Helpers - User - getUser() => ${error}`);
     }
   },
+  getUsersById: function getUsers(params) {
+    try {
+      return User.find({
+        $or: [
+          {
+            _id: '5fdade13a0879233e8f4dc93'
+          },
+          {
+            _id: '60556427a72bdd4b20d8a59a'
+          }
+        ]
+      });
+    } catch (error) {
+      console.log(`Helpers - User - getUsers() => ${error}`);
+    }
+  },
   createUser: function createUser(params) {
     try {
       // Creating empty user object 
       let newUser = new User(); 
-      newUser.user_name = 'danielvvz';
-      newUser.name = 'daniel';
-      newUser.last_name = 'vargas'
+      newUser.user_name = 'danielvvz2';
+      newUser.name = 'daniel2';
+      newUser.last_name = 'vargas2'
       // Call setPassword function to hash password
       newUser.setPassword('queso');
       // Save newUser object to database 
