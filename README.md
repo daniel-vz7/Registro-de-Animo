@@ -1,7 +1,7 @@
-# Registro de animo
-The objective of this application is that a user registers his emotional status within a a range from 0 to 10. Then another user with authorization is able to analyze this data
+# Registro de ánimo
+The objective of this application is that a user registers his emotional status within a range from 0 to 10. Then another user with authorization can analyze this data
 
-## Start up
+## Startup
 _This instructions will let you know how to run this project on your local machine for development or testing purposes_
 
 
@@ -11,7 +11,7 @@ _This instructions will let you know how to run this project on your local machi
 - MongoDB service running on port 27017
 - 8080 port free
 
-### Originally developed on this environment
+### Originally developed in this environment
 - Windows 10
 - Node v12.16.3
 - Npm v6.14.4
@@ -28,7 +28,7 @@ npm install
 npm run dev
 ```
 
-Note: This will run it on a dev environment with nodemon, I'll update the instructions for a production environment once I set it
+Note: This will run it on a dev environment with nodemon, I'll update the instructions for a production environment once I set them
 
 
 ## Authors
